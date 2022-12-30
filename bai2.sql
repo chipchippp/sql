@@ -1,0 +1,32 @@
+IF EXISTS (SELECT * FROM sys.databases WHERE Name='Example5')
+DROP DATABASE Example5
+GO
+--CRUB; CREATE, READ, UPDATE, DELETE Database
+--
+CREATE DATABASE Example5
+GO
+USE Example5
+SELECT create_date FROM sys.databases WHERE name = 'Example5'
+
+EXEC sp_databases
+--STUDENTINFO TABLE
+CREATE TABLE StudentInfo(
+ [SID] PRIMARY KEY,
+ S_Name varchar(50),
+ GPA FLOAT
+ )
+ --COURSE TABLE
+ CREATE TABLE CourseInfo(
+ CID INT PRIMARY KEY,
+ C_NAME VARCHAR(50)
+ )
+--student_CouRSE
+CREATE TABLE CourseGrade(
+    GID INT PRIMARY KEY,
+	Grade varchar(5) NOT NULL,
+	CID INT NOT NULL,
+	SID INT NOT NULL,
+
+	CONSTRAINT CG_SID_FK FOREIGN KEY(SID) REFERENCES StudentInfo(SID),
+	CONSTRAINT CG_CID_FK FOREIGN KEY(SID) REFERENCES CourseInfo (CID)
+)
